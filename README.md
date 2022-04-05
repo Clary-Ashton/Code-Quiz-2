@@ -18,4 +18,6 @@ Clary Mawangi
 
 ## Contact me :
 
+[Clary Mawangi](http://github.com/Clary-Ashton)
+
 
