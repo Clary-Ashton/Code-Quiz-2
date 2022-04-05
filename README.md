@@ -6,7 +6,10 @@ A timed coding quiz app with multiple-choice questions. This app will run in the
 
 ## Live Link
 
-## Screenshot
+## Screenshots
+
+![Screenshot (36)](https://user-images.githubusercontent.com/78886789/161814558-a7b6446c-a6ee-46ca-8ee6-3d5d87848cab.png)
+
 
 ## Licence
 
