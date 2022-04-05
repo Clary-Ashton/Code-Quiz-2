@@ -94,3 +94,9 @@ function updateTimer() {
   decrementTimer(100);
   updateTimerText(timerValue)
 }
+
+function startTimer() {
+    timerValue = timeLimit;
+    updateTimerText(timerValue)
+    timerId = setInterval(updateTimer, 100);
+  }
