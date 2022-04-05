@@ -68,3 +68,29 @@ highScoresBtn.addEventListener("click", showHighScores);
 homeBtn.addEventListener("click", returnHome);
 
 startBtn.addEventListener("click", startQuiz);
+
+let highScoreMaxCount = 5;
+let highScoreInitials
+let currentQuiz
+let score
+let timerValue
+let timerId
+let answer
+let rank
+
+function updateTimerText(ms) {
+  if (ms === -1) {
+    timer.innerText = '';
+  }
+  else if (ms > 0) {
+    timer.innerText = 'Time Remaining: ' + (ms / 1000.0).toFixed(1) + ' seconds';
+  }
+  else {
+    timer.innerText = "Time's up!"
+  }
+}
+
+function updateTimer() {
+  decrementTimer(100);
+  updateTimerText(timerValue)
+}
