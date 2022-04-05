@@ -155,4 +155,119 @@ function startTimer() {
     quiz.style.display = "none";
     results.style.display = "block";
   }
+  function submitHighScore() {
+    scores.style.display = "block";
+    quiz.style.display = "none";
+    let initialsEl = document.getElementById('high-score-input');
+    if (initialsEl) {
+      setHighScore(rank, initialsEl.value, score);
+    }
+    updateHighScores();
+    scores.style.display = "block";
+    results.style.display = "none";
+  }
   
+  function updateHighScores() {
+    let highScores = getHighScores();
+    for (let rank = 1; rank <= highScoreMaxCount; rank++) {
+      let scoreEl = document.getElementById('high-score-' + rank).getElementsByClassName('name')[0];
+      let score = highScores[rank - 1];
+      if (score) {
+        scoreEl.innerHTML = rank + ') ' + score.initials + ' - ' + score.correct + '/' + quizData.length;
+      }
+      else {
+        scoreEl.innerHTML = '';
+      }
+    }
+  }
+  
+  function loadQuiz() {
+    deselectAnswers()
+    const currentQuizData = quizData[currentQuiz]
+  
+    questionEl.innerText = currentQuizData.question
+    a_text.innerText = currentQuizData.a
+    b_text.innerText = currentQuizData.b
+    c_text.innerText = currentQuizData.c
+    d_text.innerText = currentQuizData.d
+  }
+  
+  function decrementTimer(value) {
+    timerValue -= value;
+    if (timerValue <= 0) {
+      clearInterval(timerId);
+      stopQuiz();
+    }
+  }
+  
+  function deselectAnswers() {
+    answerEls.forEach(answerEl => answerEl.checked = false)
+  }
+  
+  function setAnswer(e) {
+    answer = e.target.id
+  }
+  
+  function getHighScores() {
+    let highScores = JSON.parse(localStorage.getItem('highscores'));
+    if (!highScores)
+      highScores = []
+  
+    return highScores
+  }
+  
+  function getHighScore(position) {
+    let highScores = getHighScores();
+    if (!highScores)
+      return null
+  
+    if (highScores.length < position)
+      return null
+  
+    return highScores[position]
+  }
+  
+  function setHighScore(position, initials, correct) {
+    let highScores = getHighScores();
+    if (!highScores || !Array.isArray(highScores))
+      highScores = [];
+  
+    highScores.splice(position, 0, { initials, correct })
+    if (highScores.length > highScoreMaxCount)
+      highScores.pop();
+  
+    localStorage.setItem('highscores', JSON.stringify(highScores))
+  }
+  
+  function showHighScores() {
+    updateHighScores();
+    scores.style.display = "block";
+    intro.style.display = "none";
+    quiz.style.display = "none";
+    highScoresBtn.style.visibility = "hidden";
+  }
+  
+  function returnHome() {
+    scores.style.display = "none";
+    intro.style.display = "block";
+    highScoresBtn.style.visibility = "visible";
+  }
+  
+  submitBtn.addEventListener('click', () => {
+    if (answer === quizData[currentQuiz].correct) {
+      score++;
+    }
+    else {
+      decrementTimer(5000);
+      updateTimerText(timerValue);
+    }
+  
+    answer = null
+    currentQuiz++;
+  
+    if (currentQuiz < quizData.length) {
+      loadQuiz();
+    } else {
+      stopQuiz();
+    }
+  })
