@@ -8,7 +8,8 @@ A timed coding quiz app with multiple-choice questions. This app will run in the
 
 ## Screenshots
 
-![Screenshot (36)](https://user-images.githubusercontent.com/78886789/161814558-a7b6446c-a6ee-46ca-8ee6-3d5d87848cab.png)
+![Screenshot (37)](https://user-images.githubusercontent.com/78886789/161814684-2dffebae-9355-499a-91e3-6b142e9e1dac.png)
+
 
 
 ## Licence
