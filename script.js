@@ -100,3 +100,59 @@ function startTimer() {
     updateTimerText(timerValue)
     timerId = setInterval(updateTimer, 100);
   }
+
+  function startQuiz() {
+    currentQuiz = 0;
+    score = 0;
+    answer = null;
+    quiz.style.display = "block";
+    intro.style.display = "none";
+    highScoresBtn.style.visibility = "hidden";
+    deselectAnswers()
+    const currentQuizData = quizData[currentQuiz]
+    questionEl.innerText = currentQuizData.question
+    a_text.innerText = currentQuizData.a
+    b_text.innerText = currentQuizData.b
+    c_text.innerText = currentQuizData.c
+    d_text.innerText = currentQuizData.d
+  
+    loadQuiz()
+    startTimer()
+  }
+  
+  function stopQuiz() {
+    updateTimerText(-1);
+    clearInterval(timerId);
+  
+    rank = 0
+    let highScores = getHighScores();
+    for (let highScore of highScores) {
+      if (score > highScore.correct || rank == highScoreMaxCount)
+        break;
+  
+      rank++;
+    }
+  
+    correctAnswers.innerHTML = `
+      You answered ${score} out of ${quizData.length} questions correctly
+    `
+  
+    if (rank < highScoreMaxCount) {
+      highScoreInitials = '';
+      submitHighScoreBtn.innerHTML = 'Submit';
+      initials.innerHTML = `
+        <h3>Congratulations, you've reached rank #${rank + 1}!</h3>
+        <label>Enter your initials</label>
+        <input id="high-score-input" maxlength="3"></input>
+      `
+    }
+    else {
+      initials.innerHTML = '';
+      submitHighScoreBtn.innerHTML = 'View High Scores';
+      highScoresBtn.style.visibility = "visible";
+    }
+  
+    quiz.style.display = "none";
+    results.style.display = "block";
+  }
+  
