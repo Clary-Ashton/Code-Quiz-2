@@ -40,3 +40,31 @@ const quizData = [
       correct: "c",
     },
   ];
+
+  const timeLimit = 60 * 1000;
+const intro = document.getElementById('intro')
+const startBtn = document.getElementById('start-btn')
+const submitBtn = document.getElementById('submit')
+const quiz = document.getElementById('quiz')
+
+const highScoresBtn = document.getElementById('high-scores-btn')
+const submitHighScoreBtn = document.getElementById('submit-high-score-btn')
+const homeBtn = document.getElementById('return-home-btn')
+const results = document.getElementById('results')
+const initials = document.getElementById('initials')
+const correctAnswers = document.getElementById('correct-answers')
+
+const timer = document.getElementById('timer')
+
+const questionEl = document.getElementById('question')
+const answerEls = document.querySelectorAll('.answer')
+const a_text = document.getElementById('a')
+const b_text = document.getElementById('b')
+const c_text = document.getElementById('c')
+const d_text = document.getElementById('d')
+
+answerEls.forEach(answerEl => answerEl.addEventListener("click", setAnswer))
+highScoresBtn.addEventListener("click", showHighScores);
+homeBtn.addEventListener("click", returnHome);
+
+startBtn.addEventListener("click", startQuiz);
